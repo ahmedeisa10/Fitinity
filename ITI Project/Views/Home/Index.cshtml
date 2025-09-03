@@ -2,7 +2,65 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="full-banner">
+    <img src="~/images/gym.jpg" alt="GYM" />
+    <div class="overlay"></div>
+    <div class="banner-text">
+        <h1>Welcome to My Gym</h1>
+        <p>Strong body, strong mind</p>
+        <a href="/Home/About" class="btn btn-primary btn-lg mt-3">Join Now</a>
+    </div>
 </div>
+
+<style>
+    html, body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+    }
+
+    main {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+    }
+
+    .full-banner {
+        position: relative;
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
+    }
+
+        .full-banner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(70%); /* خفوت */
+        }
+
+    .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.3); /* تظليل خفيف */
+    }
+
+    .banner-text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        color: white;
+        z-index: 2;
+        text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+    }
+
+    /* Navbar فوق الصورة */
+    .navbar {
+        z-index: 3; /* فوق كل العناصر */
+    }
+</style>
