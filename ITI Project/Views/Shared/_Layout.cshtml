@@ -11,22 +11,34 @@
 <body>
 	<header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-transparent position-absolute w-100">
-            <div class="container-fluid">
+            <div class="container-fluid position-relative">
+                <!-- اللوجو شمال -->
                 <a class="navbar-brand d-flex align-items-center text-white fw-bold" href="/">
                     Fitinity
                 </a>
+
+                <!-- زرار الموبايل -->
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ms-auto">
+
+                <!-- اللينكات في النص (ثابتة) -->
+                <div class="position-absolute top-50 start-50 translate-middle">
+                    <ul class="navbar-nav flex-row gap-3">
                         <li class="nav-item"><a class="nav-link text-white" href="/">Home</a></li>
                         <li class="nav-item"><a class="nav-link text-white" href="/Home/About">About</a></li>
                         <li class="nav-item"><a class="nav-link text-white" href="/Home/Contact">Contact</a></li>
                     </ul>
                 </div>
+
+                <!-- اليمين -->
+                <div class="ms-auto">
+                    <partial name="_LoginPartial" />
+                </div>
             </div>
         </nav>
+
+
     </header>
 
     <main role="main">
