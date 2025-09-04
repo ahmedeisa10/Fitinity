@@ -1,6 +1,6 @@
 ﻿namespace ITI_Project.Services
 {
-    public class FileServices
+    public class FileServices : IFileServices
     {
         private readonly IWebHostEnvironment _environment;
         public FileServices(IWebHostEnvironment environment)
