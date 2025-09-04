@@ -23,6 +23,8 @@ namespace ITI_Project
                .AddDefaultUI()
                .AddDefaultTokenProviders();
             builder.Services.AddControllersWithViews();
+            builder.Services.AddHttpClient();
+
 
             var app = builder.Build();
 
