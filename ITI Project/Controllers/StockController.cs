@@ -46,7 +46,7 @@ namespace ITI_Project.Controllers
             }
             catch (Exception ex)
             {
-                TempData["errorMessage"] = "Something went wrong!!";
+                TempData["errorMessage"] = ex.InnerException?.Message ?? ex.Message;
             }
 
             return RedirectToAction(nameof(GetStocks));

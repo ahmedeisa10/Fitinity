@@ -1,7 +1,11 @@
 ﻿using System.Threading.Tasks;
 using ITI_Project.Data;
+using ITI_Project.Repository;
+using ITI_Project.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore;
+
 
 namespace ITI_Project
 {
@@ -23,6 +27,16 @@ namespace ITI_Project
                .AddDefaultUI()
                .AddDefaultTokenProviders();
             builder.Services.AddControllersWithViews();
+
+            //Services
+            builder.Services.AddScoped<IHomeRepository, HomeRepository>();
+            builder.Services.AddScoped<ICartRepository, CartRepository>();
+            builder.Services.AddScoped<IUserOrderRepository, UserOrderRepository>();
+            builder.Services.AddScoped<IStockRepository, StockRepository>();
+            builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+            builder.Services.AddScoped<IProductRepository, ProductRepository>();
+            builder.Services.AddScoped<IFileServices, FileServices>();
+
 
             var app = builder.Build();
 

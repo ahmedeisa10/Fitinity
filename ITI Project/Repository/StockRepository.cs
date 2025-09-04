@@ -46,11 +46,11 @@ namespace ITI_Project.Repository
                                 on product.Id equals stock.ProductId
                                 into product_stock
                                 from productStock in product_stock.DefaultIfEmpty()
-                                where string.IsNullOrWhiteSpace(sTerm) || product.productName.ToLower().Contains(sTerm.ToLower())
+                                where string.IsNullOrWhiteSpace(sTerm) || product.ProductName.ToLower().Contains(sTerm.ToLower())
                                 select new StockDisplayModel
                                 {
                                     ProductId = product.Id,
-                                    ProductName = product.productName,
+                                    ProductName = product.ProductName,
                                     Quantity = productStock == null ? 0 : productStock.Quantity
                                 }
                                ).ToListAsync();

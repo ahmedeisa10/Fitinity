@@ -11,7 +11,7 @@ namespace ITI_Project.Models
         [MaxLength(40)]
         public string? ProductName { get; set; }
         [Required]
-        [MaxLength(40)]
+        [MaxLength(100)]
         public string? Description { get; set; }
 
         public string? Image { get; set; }

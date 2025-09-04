@@ -18,8 +18,8 @@ namespace Product_mvc.Controllers
         private readonly ICategoryRepository categoryRepository;
         private readonly IFileServices fileServices;
 
-        public ProductController(IProductRepository productRepository
-            , ICategoryRepository genreRepository
+        public ProductController(IProductRepository ProductRepository
+            , ICategoryRepository categoryRepository
             , IFileServices fileServices)
         {
             this.ProductRepository = ProductRepository;
@@ -73,7 +73,7 @@ namespace Product_mvc.Controllers
                     CategoryId = ProductDTO.CategoryId
                 };
                 await ProductRepository.AddProduct(Product);
-                TempData["successMessage"] = "Book is added successfully";
+                TempData["successMessage"] = "Product is added successfully";
                 return RedirectToAction(nameof(AddProduct));
             }
 
@@ -100,7 +100,7 @@ namespace Product_mvc.Controllers
             var Product = await ProductRepository.GetProductById(id);
             if (Product == null)
             {
-                TempData["errorMessage"] = $"Book with the id: {id} does not found";
+                TempData["errorMessage"] = $"Product with the id: {id} does not found";
                 return RedirectToAction(nameof(Index));
             }
 
@@ -123,7 +123,7 @@ namespace Product_mvc.Controllers
             return View(ProductDTO);
         }
         [HttpPost]
-        public async Task<IActionResult> UpdateBook(ProductDTO ProductDTO)
+        public async Task<IActionResult> UpdateProduct(ProductDTO ProductDTO)
         {
             var CategorySelectList = (await categoryRepository.GetCategory()).Select(Category => new SelectListItem
             {
@@ -170,7 +170,7 @@ namespace Product_mvc.Controllers
                 {
                     fileServices.DeleteFile(oldImage);
                 }
-                TempData["successMessage"] = "Book is updated successfully";
+                TempData["successMessage"] = "Product is updated successfully";
                 return RedirectToAction(nameof(Index));
             }
             catch (InvalidOperationException ex)
