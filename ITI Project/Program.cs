@@ -1,3 +1,4 @@
+﻿using System.Threading.Tasks;
 using ITI_Project.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -6,7 +7,7 @@ namespace ITI_Project
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
 
@@ -16,11 +17,23 @@ namespace ITI_Project
                 options.UseSqlServer(connectionString));
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-            builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+            builder.Services
+               .AddIdentity<IdentityUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
+               .AddEntityFrameworkStores<ApplicationDbContext>()
+               .AddDefaultUI()
+               .AddDefaultTokenProviders();
             builder.Services.AddControllersWithViews();
 
             var app = builder.Build();
+
+            //Admin  عشان خلاص سجلت واحد قبل كدة كـuncomment عامله 
+            //using (var scope = app.Services.CreateScope())
+            //{
+            //    await DBSeeder.SeedDefaultData(scope.ServiceProvider);
+            //}
+
+
+
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
