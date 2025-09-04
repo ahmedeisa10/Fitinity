@@ -1,7 +1,21 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@using ITI_Project.DTO
+@model ProductDisplayModel
+@{
+
 }
 
+<<<<<<< HEAD
+<div class="my-2">
+    <form asp-action="Index" class="row row-cols-lg-auto g-3 align-items-center">
+        <div class="col-12">
+            <label class="visually-hidden" for="CategoryId">Categories</label>
+            <select class="form-select" id="CategoryId" name="CategoryId">
+                <option selected>All Categories</option>
+                @foreach (var Category in Model.Categories)
+                {
+                    <option selected="@(Category.Id==Model.CategoryId)" value="@Category.Id">@Category.CategoryName</option>
+                }
+=======
 @* <div class="full-banner"> *@
 @*     <img src="~/Images/gym.jpg" alt="GYM" /> *@
 @*     <div class="overlay"></div> *@
@@ -11,56 +25,99 @@
 @*         <a href="/Home/About" class="btn btn-primary btn-lg mt-3">Join Now</a> *@
 @*     </div> *@
 @* </div> *@
+>>>>>>> 154be12d98a03606ce9102439edc470ca06545d4
 
-@* <style> *@
-@*     html, body { *@
-@*         margin: 0; *@
-@*         padding: 0; *@
-@*         height: 100%; *@
-@*     } *@
 
-@*     main { *@
-@*         margin: 0; *@
-@*         padding: 0; *@
-@*         height: 100%; *@
-@*     } *@
+            </select>
+        </div>
 
-@*     .full-banner { *@
-@*         position: relative; *@
-@*         width: 100vw; *@
-@*         height: 100vh; *@
-@*         overflow: hidden; *@
-@*     } *@
+        <div class="col-12">
 
-@*         .full-banner img { *@
-@*             width: 100%; *@
-@*             height: 100%; *@
-@*             object-fit: cover; *@
-@*             filter: brightness(70%); /* خفوت */ *@
-@*         } *@
+            <label class="visually-hidden" for="sTerm">Search by title</label>
+            <div class="input-group">
+                <div class="input-group-text"><i class="bi bi-search"></i></div>
+                <input type="text" class="form-control" value="@Model.sTerm" id="sTerm" name="sTerm" placeholder="Search by title">
+            </div>
+        </div>
 
-@*     .overlay { *@
-@*         position: absolute; *@
-@*         top: 0; *@
-@*         left: 0; *@
-@*         width: 100%; *@
-@*         height: 100%; *@
-@*         background: rgba(0,0,0,0.3); /* تظليل خفيف */ *@
-@*     } *@
 
-@*     .banner-text { *@
-@*         position: absolute; *@
-@*         top: 50%; *@
-@*         left: 50%; *@
-@*         transform: translate(-50%, -50%); *@
-@*         text-align: center; *@
-@*         color: white; *@
-@*         z-index: 2; *@
-@*         text-shadow: 2px 2px 8px rgba(0,0,0,0.7); *@
-@*     } *@
 
-@*     /* Navbar فوق الصورة */ *@
-@*     .navbar { *@
-@*         z-index: 3; /* فوق كل العناصر */ *@
-@*     } *@
-@* </style> *@
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary">Search</button>
+            <a href="/Home/Index" class="btn btn-dark">Reset</a>
+        </div>
+    </form>
+
+</div>
+
+
+<div class="w-100 mt-4 d-flex flex-wrap">
+    @foreach (var product in Model.Products)
+    {
+        <div class="card mx-2 mb-4" style="width: 16rem;">
+            @if (string.IsNullOrEmpty(product.Image))
+            {
+                <img style="width:100%;height:300px" src="/Images/No image.jpg" class="card-img-top" alt="..." title="No Image">
+            }
+            else
+            {
+                <img style="width:100%;height:300px" src="/Images/@product.Image" class="card-img-top" alt="..." title="@product.ProductName">
+
+            }
+            <div class="card-body d-flex flex-column">
+                <h5 class="card-title">@product.ProductName</h5>
+                <p class="card-text">
+                    <b>Category</b>: @product.CategoryName
+                    <br />
+                    <b>Description</b>: @product.Description
+                    <br />
+                    <b>Price</b>: @product.Price $
+                     <br/> 
+                    <b>Quantity</b>: @product.Quantity  
+                </p>
+                @if (product.Quantity > 0)
+                {
+
+                    <button type="button" onclick="add(@product.Id)" class="btn btn-primary mt-auto w-100">Add To Cart</button>
+                }
+                else
+                {
+                    <span style="border: 1px solid;padding: 5px 8px;color: red;border-radius: 5px;">Out of stock</span>
+
+                }
+            </div>
+        </div>
+    }
+</div>
+
+
+
+@section Scripts {
+    <script>
+        async function add(productId) {
+             var usernameEl = document.getElementById("username");
+        if(usernameEl==null){
+            window.location.href = "/Identity/Account/Login";
+          //var username=usernameEl.innerText;
+          //  if(username.length<1){
+          //      window.location.href="/Identity/Account/Login";
+          //  }
+        }
+            try {
+                var response = await fetch(`/Cart/AddItem?ProductId=${productId}`);
+                if (response.status == 200) {
+                    var result = await response.json();
+                    var cartCountEl = document.getElementById("cartCount");
+                    cartCountEl.innerHTML = result;
+                    window.location.href = "#cartCount";
+                }
+            }
+            catch (err) {
+                console.log(err);
+            }
+        }
+    </script>
+}
+
+
+
