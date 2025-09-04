@@ -17,7 +17,7 @@ namespace ITI_Project.Models
         public string? Image { get; set; }
         public double Price { get; set; }
         [Required]
-        public int GenreId { get; set; }
+        public int CategoryId { get; set; }
         public Category Categories { get; set; } // one Product has one Category
         public List<OrderDetail> OrderDetail { get; set; }
         public List<CartDetail> CartDetail { get; set; }
