@@ -1,38 +1,66 @@
-﻿<!DOCTYPE html>
+﻿@using ITI_Project.Constants
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - ITI_Project</title>
-	<link rel ="stylesheet" href="~/css/bootstrap.min (3).css" />
+    <link rel ="stylesheet" href="~/css/bootstrap.min (3).css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" rel="stylesheet">
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/ITI_Project.styles.css" asp-append-version="true" />
 </head>
 <body>
-	<header>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-transparent position-absolute w-100">
-            <div class="container-fluid position-relative">
-                <!-- اللوجو شمال -->
-                <a class="navbar-brand d-flex align-items-center text-white fw-bold" href="/">
-                    Fitinity
-                </a>
-
-                <!-- زرار الموبايل -->
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+    <header>
+        <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/Home/Index">Fitinity</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+                <div class="collapse navbar-collapse" id="navbarColor01">
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="/Home/Index">
+                                Home
+                                <span class="visually-hidden">(current)</span>
+                            </a>
+                        </li>
 
-                <!-- اللينكات في النص (ثابتة) -->
-                <div class="position-absolute top-50 start-50 translate-middle">
-                    <ul class="navbar-nav flex-row gap-3">
-                        <li class="nav-item"><a class="nav-link text-white" href="/">Home</a></li>
-                        <li class="nav-item"><a class="nav-link text-white" href="/Home/About">About</a></li>
-                        <li class="nav-item"><a class="nav-link text-white" href="/Home/Contact">Contact</a></li>
+                        @if (User.IsInRole(Roles.Admin.ToString()))
+                        {
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="/AdminOperations/Dashboard">Dashboard</a>
+                            </li>
+
+
+                            @* <li class="nav-item"> *@
+                            @*     <a class="nav-link" href="/AdminOperations/AllOrders">Orders</a> *@
+                            @* </li>   *@
+
+                            @* <li class="nav-item"> *@
+                            @*     <a class="nav-link" href="/Stock/GetStocks">Stock</a> *@
+                            @* </li> *@
+                            @* <li class="nav-item"> *@
+                            @*     <a class="nav-link" href="/Genre/Index">Genres</a> *@
+                            @* </li> *@
+                            @* <li class="nav-item"> *@
+                            @*     <a class="nav-link" href="/Book/Index">Books</a> *@
+                            @* </li> *@
+                        }
+
+                        @* <li class="nav-item dropdown"> *@
+                        @*     <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a> *@
+                        @*     <div class="dropdown-menu"> *@
+                        @*         <a class="dropdown-item" href="#">Action</a> *@
+                        @*         <a class="dropdown-item" href="#">Another action</a> *@
+                        @*         <a class="dropdown-item" href="#">Something else here</a> *@
+                        @*         <div class="dropdown-divider"></div> *@
+                        @*         <a class="dropdown-item" href="#">Separated link</a> *@
+                        @*     </div> *@
+                        @* </li> *@
                     </ul>
-                </div>
-
-                <!-- اليمين -->
-                <div class="ms-auto">
                     <partial name="_LoginPartial" />
                 </div>
             </div>
@@ -40,10 +68,11 @@
 
 
     </header>
+<div class="container">
 
-    <main role="main">
         @RenderBody()
-    </main>
+</div>
+    
 
 
     
