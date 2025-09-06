@@ -14,16 +14,17 @@
         }
         
         body {
-            background: white; /* تغيير الخلفية إلى اللون الأبيض */
+            background: white;
             color: #333;
             line-height: 1.6;
             min-height: 100vh;
-            padding: 0; /* إزالة الحشوة من الجسم */
+            padding: 0;
+            padding-top: 70px; /* إضافة حشوة علوية لتجنب تداخل المحتوى مع النافبار */
         }
         
-        /* النافبار الجديد */
+        /* النافبار الثابت في الأعلى */
         .navbar {
-            position: sticky;
+            position: fixed;
             top: 0;
             width: 100%;
             background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
@@ -489,7 +490,7 @@
     </style>
 </head>
 <body>
-    <!-- النافبار الجديد -->
+    <!-- النافبار الثابت في الأعلى -->
     <nav class="navbar">
         <div class="nav-container">
             <a href="#" class="logo">
@@ -821,7 +822,7 @@
                 },
                 normal: {
                     title: "نظام الحفاظ على الوزن",
-                    description: "هذا النظام مصمم للحفاظ على وزنك الحالي مع تزويد جسمك بالعناصر الغذائية اللازمة لصحة مثالية.",
+                    description: "هthis النظام مصمم للحفاظ على وزنك الحالي مع تزويد جسمك بالعناصر الغذائية اللازمة لصحة مثالية.",
                     days: [
                         {
                             day: "اليوم الأول",
@@ -861,7 +862,7 @@
                                 },
                                 {
                                     name: "الغداء",
-                                    description: "سلطة مع تونة + خضار طازجة + زит زيتون"
+                                    description: "سلطة مع تونة + خضار طازجة + زيت زيتون"
                                 },
                                 {
                                     name: "وجبة خفيفة",
@@ -984,7 +985,7 @@
                             meals: [
                                 {
                                     name: "الإفطار",
-                                    description: "شوفان مع ماء + توت + ملعقة بذور شia"
+                                    description: "شوفان مع ماء + توت + ملعقة بذور شيا"
                                 },
                                 {
                                     name: "وجبة خفيفة",
