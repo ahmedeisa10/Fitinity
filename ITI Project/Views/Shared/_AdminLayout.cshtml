@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Admin Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
           rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
@@ -13,30 +13,347 @@
           href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
 
     <link href="~/ITI Project.styles.css" rel="stylesheet" />
-
+    <style>
+        :root {
+            --primary-color: #1a2a6c;
+            --secondary-color: #b21f1f;
+            --accent-color: #fdbb2d;
+            --light-color: #ff6b6b;
+            --sidebar-width: 250px;
+            --sidebar-bg: #1a2a6c;
+            --sidebar-color: white;
+            --header-bg: white;
+            --content-bg: #f8f9fa;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--content-bg);
+            color: #333;
+            overflow-x: hidden;
+        }
+        
+        .main-contaier {
+            display: flex;
+            min-height: 100vh;
+        }
+        
+        /* الشريط الجانبي */
+        .sidenav {
+            width: var(--sidebar-width);
+            background: linear-gradient(180deg, var(--primary-color), var(--secondary-color));
+            color: var(--sidebar-color);
+            padding: 20px 0;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            box-shadow: 3px 0 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .navigation-link {
+            display: flex;
+            align-items: center;
+            padding: 15px 25px;
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
+            margin: 5px 10px;
+            border-radius: 8px;
+        }
+        
+        .navigation-link i {
+            margin-right: 15px;
+            font-size: 1.2rem;
+            width: 24px;
+            text-align: center;
+        }
+        
+        .navigation-link:hover {
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            border-left: 4px solid var(--accent-color);
+            transform: translateX(5px);
+        }
+        
+        .navigation-link:active,
+        .navigation-link:focus {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+        
+        /* اللوحة اليمنى */
+        .right-panel {
+            flex: 1;
+            margin-left: var(--sidebar-width);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* شريط التنقل العلوي */
+        .nav-bar {
+            background: var(--header-bg);
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .nav-heading {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+        }
+        
+        .nav-heading::before {
+            content: "👋";
+            margin-right: 10px;
+        }
+        
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .nav-actions .navigation-link {
+            color: var(--primary-color);
+            padding: 8px 15px;
+            border-radius: 8px;
+            background: rgba(26, 42, 108, 0.1);
+            border: none;
+            cursor: pointer;
+        }
+        
+        .nav-actions .navigation-link:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .nav-actions form {
+            margin: 0;
+        }
+        
+        .nav-actions button {
+            background: none;
+            border: none;
+            color: var(--primary-color);
+            padding: 8px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .nav-actions button:hover {
+            background: var(--secondary-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        /* المحتوى الرئيسي */
+        .content {
+            flex: 1;
+            padding: 30px;
+            background: var(--content-bg);
+        }
+        
+        /* إشعارات */
+        .alert {
+            border-radius: 10px;
+            border: none;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        
+        .alert-success {
+            background: linear-gradient(135deg, #d4edda, #c3e6cb);
+            color: #155724;
+        }
+        
+        .alert-danger {
+            background: linear-gradient(135deg, #f8d7da, #f5c6cb);
+            color: #721c24;
+        }
+        
+        .alert-info {
+            background: linear-gradient(135deg, #d1ecf1, #bee5eb);
+            color: #0c5460;
+        }
+        
+        /* تصميم متجاوب */
+        media (max-width: 992px) {
+            .sidenav {
+                width: 70px;
+                overflow: visible;
+            }
+            
+            .navigation-link span {
+                display: none;
+            }
+            
+            .navigation-link i {
+                margin-right: 0;
+                font-size: 1.4rem;
+            }
+            
+            .right-panel {
+                margin-left: 70px;
+            }
+            
+            .nav-bar {
+                padding: 15px 20px;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+        }
+        
+        media (max-width: 768px) {
+            .sidenav {
+                width: 0;
+                transform: translateX(-100%);
+            }
+            
+            .sidenav.active {
+                width: 250px;
+                transform: translateX(0);
+            }
+            
+            .right-panel {
+                margin-left: 0;
+            }
+            
+            .nav-actions {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .menu-toggle {
+                display: block;
+                position: fixed;
+                top: 20px;
+                left: 20px;
+                z-index: 1001;
+                background: var(--primary-color);
+                color: white;
+                border: none;
+                border-radius: 50%;
+                width: 40px;
+                height: 40px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            }
+        }
+        
+        /* تأثيرات إضافية */
+        .navigation-link {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .navigation-link::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.7s ease;
+        }
+        
+        .navigation-link:hover::after {
+            left: 100%;
+        }
+        
+        /* أنيميشن لتحميل المحتوى */
+        keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .content > * {
+            animation: fadeIn 0.5s ease forwards;
+        }
+    </style>
 </head>
 <body>
+    <button class="menu-toggle d-lg-none" id="menuToggle">
+        <i class="bi bi-list"></i>
+    </button>
+
     <div class="main-contaier">
-        <div class="sidenav">
-            <a class="navigation-link" href="/Home/Index"><i class="bi bi-house-door"></i> Home</a>
-            <a href="/AdminOperations/AllOrders" class="navigation-link"><i class="bi bi-receipt"></i> Orders</a>
-            <a href="/Stock/GetStocks" class="navigation-link"><i class="bi bi-archive"></i> Stock</a>
-            <a href="/Category/Index" class="navigation-link"><i class="bi bi-collection"></i> Category</a>
-            <a href="/Product/Index" class="navigation-link"><i class="bi bi-book"></i> Products</a>
-            <a href="/Reports/TopFiveSellingBooks" class="navigation-link"><i class="bi bi-bar-chart"></i> Top Salling Items</a>
+        <div class="sidenav" id="sidebar">
+            <a class="navigation-link" href="/Home/Index">
+                <i class="bi bi-house-door"></i>
+                <span>Home</span>
+            </a>
+            <a href="/AdminOperations/AllOrders" class="navigation-link">
+                <i class="bi bi-receipt"></i>
+                <span>Orders</span>
+            </a>
+            <a href="/Stock/GetStocks" class="navigation-link">
+                <i class="bi bi-archive"></i>
+                <span>Stock</span>
+            </a>
+            <a href="/Category/Index" class="navigation-link">
+                <i class="bi bi-collection"></i>
+                <span>Category</span>
+            </a>
+            <a href="/Product/Index" class="navigation-link">
+                <i class="bi bi-book"></i>
+                <span>Products</span>
+            </a>
+            <a href="/Reports/TopFiveSellingBooks" class="navigation-link">
+                <i class="bi bi-bar-chart"></i>
+                <span>Top Selling Items</span>
+            </a>
         </div>
+        
         <div class="right-panel">
             <nav class="nav-bar">
                 <div class="nav-heading">Welcome Admin!</div>
                 <div class="nav-actions">
-                    <a href="/Identity/Account/Manage/Index" class="navigation-link"><i class="bi bi-gear"></i> Manage account</a>
+                    <a href="/Identity/Account/Manage/Index" class="navigation-link">
+                        <i class="bi bi-gear"></i>
+                        <span>Manage account</span>
+                    </a>
                     <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
                         <button type="submit" class="navigation-link">
-                            <i class="bi bi-box-arrow-left"></i> Logout
+                            <i class="bi bi-box-arrow-left"></i>
+                            <span>Logout</span>
                         </button>
                     </form>
                 </div>
             </nav>
+            
             <div class="content">
                 <div class="my-2">
                     <partial name="_Notifications" />
@@ -45,8 +362,27 @@
             </div>
         </div>
     </div>
+
+    <script>
+        // تبديل القائمة الجانبية على الأجهزة الصغيرة
+        document.getElementById('menuToggle').addEventListener('click', function() {
+            document.getElementById('sidebar').classList.toggle('active');
+        });
+        
+        // إغلاق القائمة عند النقر خارجها
+        document.addEventListener('click', function(event) {
+            const sidebar = document.getElementById('sidebar');
+            const menuToggle = document.getElementById('menuToggle');
+            
+            if (!sidebar.contains(event.target) && !menuToggle.contains(event.target) && 
+                window.innerWidth < 768 && sidebar.classList.contains('active')) {
+                sidebar.classList.remove('active');
+            }
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
 </body>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"></script>
 </html>

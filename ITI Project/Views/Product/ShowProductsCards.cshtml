@@ -54,6 +54,7 @@
                 window.location.href = "/Identity/Account/Login";
                 return;
             }
+            
             try {
                 var response = await fetch(`/Cart/AddItem?ProductId=${productId}`);
                 if (response.status === 200) {
