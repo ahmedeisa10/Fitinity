@@ -4,6 +4,7 @@ using ITI_Project.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
+
 namespace ITI_Project.Repository
 {
     public class CartRepository : ICartRepository
@@ -220,6 +221,3 @@ namespace ITI_Project.Repository
         }
     }
 }
-
-
-

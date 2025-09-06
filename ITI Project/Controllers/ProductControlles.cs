@@ -259,5 +259,13 @@ namespace Product_mvc.Controllers
             return PartialView("_ProductsCardsPartial", model);
         }
 
+        [AllowAnonymous]
+        public async Task<IActionResult> ProductDetails(int id)
+        {
+            var product = await ProductRepository.GetProductById(id);
+            if (product == null) return NotFound();
+            return View("ProductDetails", product);
+        }
+
     }
 }
