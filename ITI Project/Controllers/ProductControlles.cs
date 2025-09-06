@@ -32,6 +32,7 @@ namespace Product_mvc.Controllers
             var product = await ProductRepository.GetProducts();
             return View(product);
         }
+        [AllowAnonymous]
         public async Task<IActionResult> ShowProductsCards(string sTerm = "", int CategoryId = 0)
         {
             var products = await ProductRepository.DisplayProducts(sTerm, CategoryId);
@@ -241,7 +242,22 @@ namespace Product_mvc.Controllers
 
         }
 
+        [AllowAnonymous]
+        [HttpGet]
+        public async Task<IActionResult> FilterProducts(string sTerm = "", int CategoryId = 0)
+        {
+            var products = await ProductRepository.DisplayProducts(sTerm, CategoryId);
 
+            var model = new ProductDisplayModel
+            {
+                Products = products.ToList(),
+                Categories = (await ProductRepository.GetCategory()).ToList(),
+                CategoryId = CategoryId,
+                sTerm = sTerm
+            };
+
+            return PartialView("_ProductsCardsPartial", model);
+        }
 
     }
 }

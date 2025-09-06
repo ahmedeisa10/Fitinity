@@ -4,31 +4,28 @@
 }
 
 <div class="my-2">
-    <form asp-action="ShowProductsCards" class="row row-cols-lg-auto g-3 align-items-center">
+    <form id="searchForm" class="row row-cols-lg-auto g-3 align-items-center">
+        <!-- Categories -->
         <div class="col-12">
             <label class="visually-hidden" for="CategoryId">Categories</label>
             <select class="form-select" id="CategoryId" name="CategoryId">
-                <option selected>All Categories</option>
+                <option value="">All Categories</option>
                 @foreach (var Category in Model.Categories)
                 {
-                    <option selected="@(Category.Id==Model.CategoryId)" value="@Category.Id">@Category.CategoryName</option>
+                    if (Category.Id == Model.CategoryId)
+                    {
+                        <option value="@Category.Id" selected>@Category.CategoryName</option>
+                    }
+                    else
+                    {
+                        <option value="@Category.Id">@Category.CategoryName</option>
+                    }
                 }
-                @* <div class="full-banner"> *@
-                @*     <img src="~/Images/gym.jpg" alt="GYM" /> *@
-                @*     <div class="overlay"></div> *@
-                @*     <div class="banner-text"> *@
-                @*         <h1>Welcome to My Gym</h1> *@
-                @*         <p>Strong body, strong mind</p> *@
-                @*         <a href="/Home/About" class="btn btn-primary btn-lg mt-3">Join Now</a> *@
-                @*     </div> *@
-                @* </div> *@
-
-
             </select>
         </div>
 
+        <!-- Search input -->
         <div class="col-12">
-
             <label class="visually-hidden" for="sTerm">Search by title</label>
             <div class="input-group">
                 <div class="input-group-text"><i class="bi bi-search"></i></div>
@@ -36,89 +33,73 @@
             </div>
         </div>
 
-
-
+        <!-- Live Reset button -->
         <div class="col-12">
-            <button type="submit" class="btn btn-primary">Search</button>
-            <a href="/Home/Index" class="btn btn-dark">Reset</a>
+            <button type="button" id="btnReset" class="btn btn-dark">Reset</button>
         </div>
     </form>
-
 </div>
 
-
-<div class="w-100 mt-4 d-flex flex-wrap">
-    @foreach (var product in Model.Products)
-    {
-        <div class="card mx-2 mb-4" style="width: 16rem;">
-            @if (string.IsNullOrEmpty(product.Image))
-            {
-                <img style="width:100%;height:300px" src="/Images/No image.jpg" class="card-img-top" alt="..." title="No Image">
-            }
-            else
-            {
-                <img style="width:100%;height:300px" src="/Images/@product.Image" class="card-img-top" alt="..." title="@product.ProductName">
-
-            }
-            <div class="card-body d-flex flex-column">
-                <h5 class="card-title">@product.ProductName</h5>
-                <p class="card-text">
-                    <b>Category</b>: @product.CategoryName
-                    <br />
-                    @* <b>Description</b>: @product.Description *@
-                    @* <br /> *@
-                    <b>Price</b>: @product.Price EGP
-
-                </p>
-                @if (product.Quantity > 0)
-                {
-                    <button type="button" onclick="add(@product.Id)" class="btn btn-primary mt-auto w-100">
-                        Add To Cart
-                    </button>
-                }
-                else
-                {
-                    <div class="mt-auto w-100">
-                        <span class="d-block text-center"
-                              style="border: 1px solid; padding: 5px 8px; color: red; border-radius: 5px;">
-                            Out of stock
-                        </span>
-                    </div>
-                }
-
-            </div>
-        </div>
-    }
+<!-- Container for products -->
+<div id="productsContainer">
+    @await Html.PartialAsync("_ProductsCardsPartial", Model)
 </div>
-
-
 
 @section Scripts {
     <script>
+        // Add to Cart function
         async function add(productId) {
             var usernameEl = document.getElementById("username");
-            if (usernameEl == null) {
+            if (!usernameEl) {
                 window.location.href = "/Identity/Account/Login";
-                //var username=usernameEl.innerText;
-                //  if(username.length<1){
-                //      window.location.href="/Identity/Account/Login";
-                //  }
+                return;
             }
             try {
                 var response = await fetch(`/Cart/AddItem?ProductId=${productId}`);
-                if (response.status == 200) {
+                if (response.status === 200) {
                     var result = await response.json();
-                    var cartCountEl = document.getElementById("cartCount");
-                    cartCountEl.innerHTML = result;
+                    document.getElementById("cartCount").innerHTML = result;
                     window.location.href = "#cartCount";
                 }
-            }
-            catch (err) {
+            } catch (err) {
                 console.log(err);
             }
         }
+
+        // Live search & category filter
+        async function filterProducts() {
+            const categoryId = document.getElementById("CategoryId").value;
+            const sTerm = document.getElementById("sTerm").value;
+
+            try {
+                const response = await fetch(`/Product/FilterProducts?CategoryId=${categoryId}&sTerm=${encodeURIComponent(sTerm)}`);
+                if (response.ok) {
+                    const html = await response.text();
+                    document.getElementById("productsContainer").innerHTML = html;
+                }
+            } catch (err) {
+                console.error(err);
+            }
+        }
+
+        // Event listeners for live search/filter
+        document.getElementById("sTerm").addEventListener("input", filterProducts);
+        document.getElementById("CategoryId").addEventListener("change", filterProducts);
+
+        // Live Reset button
+        document.getElementById("btnReset").addEventListener("click", async function() {
+            document.getElementById("sTerm").value = "";
+            document.getElementById("CategoryId").value = "";
+
+            try {
+                const response = await fetch(`/Product/FilterProducts`);
+                if (response.ok) {
+                    const html = await response.text();
+                    document.getElementById("productsContainer").innerHTML = html;
+                }
+            } catch (err) {
+                console.error(err);
+            }
+        });
     </script>
 }
-
-
-
