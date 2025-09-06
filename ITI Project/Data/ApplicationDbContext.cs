@@ -19,5 +19,6 @@ namespace ITI_Project.Data
         public DbSet<ShoppingCart> ShoppingCarts { get; set; }
         public DbSet<CartDetail> CartDetails { get; set; }
         public DbSet<Stock> Stocks { get; set; }
+     
     }
 }

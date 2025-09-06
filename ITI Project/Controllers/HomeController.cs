@@ -17,19 +17,19 @@ namespace ITI_Project.Controllers
             this.homeRepository = homeRepository;
         }
 
-        public async Task<IActionResult> Index(string sTerm = "", int CategoryId = 0)
+        public  IActionResult Index(string sTerm = "", int CategoryId = 0)
         {
-            var products = await homeRepository.DisplayProducts(sTerm, CategoryId);
-            var categories = await homeRepository.GetCategory();
-            var productModel = new ProductDisplayModel()
-            {
-                Products = products,
-                Categories = categories,
-                sTerm = sTerm,
-                CategoryId = CategoryId
-            };
+            //var products = await homeRepository.DisplayProducts(sTerm, CategoryId);
+            //var categories = await homeRepository.GetCategory();
+            //var productModel = new ProductDisplayModel()
+            //{
+            //    Products = products,
+            //    Categories = categories,
+            //    sTerm = sTerm,
+            //    CategoryId = CategoryId
+            //};
 
-            return View(productModel);
+            return View();
         }
 
 
