@@ -3,261 +3,95 @@
 @{
 }
 
-<style>
-    :root {
-        --primary-color: #1a2a6c;
-        --secondary-color: #b21f1f;
-        --accent-color: #fdbb2d;
-        --light-color: #ff6b6b;
-        --light-bg: #f8f9fa;
-    }
+<div class="my-2">
+    <form asp-action="ShowProductsCards" class="row row-cols-lg-auto g-3 align-items-center">
+        <div class="col-12">
+            <label class="visually-hidden" for="CategoryId">Categories</label>
+            <select class="form-select" id="CategoryId" name="CategoryId">
+                <option selected>All Categories</option>
+                @foreach (var Category in Model.Categories)
+                {
+                    <option selected="@(Category.Id==Model.CategoryId)" value="@Category.Id">@Category.CategoryName</option>
+                }
+                @* <div class="full-banner"> *@
+                @*     <img src="~/Images/gym.jpg" alt="GYM" /> *@
+                @*     <div class="overlay"></div> *@
+                @*     <div class="banner-text"> *@
+                @*         <h1>Welcome to My Gym</h1> *@
+                @*         <p>Strong body, strong mind</p> *@
+                @*         <a href="/Home/About" class="btn btn-primary btn-lg mt-3">Join Now</a> *@
+                @*     </div> *@
+                @* </div> *@
 
-    .products-header {
-        background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('/Images/gym.jpg') center/cover;
-        color: white;
-        padding: 80px 20px;
-        text-align: center;
-        margin-bottom: 30px;
-        border-radius: 15px;
-    }
 
-        .products-header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
+            </select>
+        </div>
 
-        .products-header p {
-            font-size: 1.2rem;
-            max-width: 600px;
-            margin: 0 auto 25px;
-        }
+        <div class="col-12">
 
-    .search-form {
-        background: white;
-        padding: 25px;
-        border-radius: 15px;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        margin-bottom: 30px;
-    }
+            <label class="visually-hidden" for="sTerm">Search by title</label>
+            <div class="input-group">
+                <div class="input-group-text"><i class="bi bi-search"></i></div>
+                <input type="text" class="form-control" value="@Model.sTerm" id="sTerm" name="sTerm" placeholder="Search by title">
+            </div>
+        </div>
 
-    .form-select, .form-control {
-        border-radius: 10px;
-        border: 1px solid #ddd;
-        padding: 10px 15px;
-    }
 
-        .form-select:focus, .form-control:focus {
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 0.2rem rgba(26, 42, 108, 0.25);
-        }
 
-    .btn-primary {
-        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-        border: none;
-        border-radius: 10px;
-        padding: 10px 20px;
-        font-weight: 500;
-        transition: all 0.3s;
-    }
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary">Search</button>
+            <a href="/Home/Index" class="btn btn-dark">Reset</a>
+        </div>
+    </form>
 
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-
-    .btn-dark {
-        background: #6c757d;
-        border: none;
-        border-radius: 10px;
-        padding: 10px 20px;
-        font-weight: 500;
-        transition: all 0.3s;
-    }
-
-        .btn-dark:hover {
-            background: #5a6268;
-            transform: translateY(-2px);
-        }
-
-    .product-card {
-        border: none;
-        border-radius: 15px;
-        overflow: hidden;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        transition: all 0.3s ease;
-        height: 100%;
-    }
-
-        .product-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-        }
-
-    .product-image {
-        height: 250px;
-        object-fit: cover;
-        width: 100%;
-    }
-
-    .product-card-body {
-        padding: 20px;
-        display: flex;
-        flex-direction: column;
-        height: 100%;
-    }
-
-    .product-title {
-        font-size: 1.2rem;
-        font-weight: 600;
-        color: var(--primary-color);
-        margin-bottom: 10px;
-    }
-
-    .product-category {
-        color: var(--secondary-color);
-        font-weight: 500;
-        margin-bottom: 8px;
-    }
-
-    .product-price {
-        font-size: 1.3rem;
-        font-weight: bold;
-        color: var(--accent-color);
-        margin-bottom: 15px;
-    }
-
-    .add-to-cart-btn {
-        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-        border: none;
-        border-radius: 10px;
-        padding: 12px;
-        color: white;
-        font-weight: 500;
-        transition: all 0.3s;
-        margin-top: auto;
-    }
-
-        .add-to-cart-btn:hover {
-            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
-            transform: translateY(-2px);
-        }
-
-    .out-of-stock {
-        background: #f8f9fa;
-        border: 2px dashed #dc3545;
-        color: #dc3545;
-        padding: 10px;
-        border-radius: 10px;
-        text-align: center;
-        font-weight: 500;
-        margin-top: auto;
-    }
-
-    .input-group-text {
-        background: var(--primary-color);
-        color: white;
-        border: none;
-        border-radius: 10px 0 0 10px;
-    }
-
-    .products-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-        gap: 25px;
-        margin-top: 30px;
-    }
-
-    @@media (max-width: 768px) {
-        .products-header {
-            padding: 50px 15px;
-        }
-
-            .products-header h1 {
-                font-size: 2rem;
-            }
-
-        .products-grid {
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 15px;
-        }
-    }
-</style>
-
-<div class="products-header">
-    <h1>Discover Our Premium Products</h1>
-    <p>Find everything you need for your fitness journey with our high-quality equipment and supplements</p>
 </div>
 
-<div class="container">
-    <div class="search-form">
-        <form asp-action="ShowProductsCards" class="row row-cols-lg-auto g-3 align-items-center">
-            <div class="col-12">
-                <label class="visually-hidden" for="CategoryId">Categories</label>
-                <select class="form-select" id="CategoryId" name="CategoryId">
-                    <option selected value="">All Categories</option>
-                    @foreach (var Category in Model.Categories)
-                    {
-                        <option selected="@(Category.Id == Model.CategoryId)" value="@Category.Id">@Category.CategoryName</option>
-                    }
-                </select>
-            </div>
 
-            <div class="col-12">
-                <label class="visually-hidden" for="sTerm">Search by title</label>
-                <div class="input-group">
-                    <div class="input-group-text"><i class="bi bi-search"></i></div>
-                    <input type="text" class="form-control" value="@Model.sTerm" id="sTerm" name="sTerm" placeholder="Search products...">
-                </div>
-            </div>
+<div class="w-100 mt-4 d-flex flex-wrap">
+    @foreach (var product in Model.Products)
+    {
+        <div class="card mx-2 mb-4" style="width: 16rem;">
+            @if (string.IsNullOrEmpty(product.Image))
+            {
+                <img style="width:100%;height:300px" src="/Images/No image.jpg" class="card-img-top" alt="..." title="No Image">
+            }
+            else
+            {
+                <img style="width:100%;height:300px" src="/Images/@product.Image" class="card-img-top" alt="..." title="@product.ProductName">
 
-            <div class="col-12">
-                <button type="submit" class="btn btn-primary">Search</button>
-                <a href="/Product/ShowProductsCards" class="btn btn-dark ms-2">Reset</a>
-            </div>
-        </form>
-    </div>
+            }
+            <div class="card-body d-flex flex-column">
+                <h5 class="card-title">@product.ProductName</h5>
+                <p class="card-text">
+                    <b>Category</b>: @product.CategoryName
+                    <br />
+                    @* <b>Description</b>: @product.Description *@
+                    @* <br /> *@
+                    <b>Price</b>: @product.Price EGP
 
-    <div class="products-grid">
-        @foreach (var product in Model.Products)
-        {
-            <div class="product-card">
-                @if (string.IsNullOrEmpty(product.Image))
+                </p>
+                @if (product.Quantity > 0)
                 {
-                    <img src="/Images/No image.jpg" class="product-image" alt="No image available">
+                    <button type="button" onclick="add(@product.Id)" class="btn btn-primary mt-auto w-100">
+                        Add To Cart
+                    </button>
                 }
                 else
                 {
-                    <img src="/Images/@product.Image" class="product-image" alt="@product.ProductName">
+                    <div class="mt-auto w-100">
+                        <span class="d-block text-center"
+                              style="border: 1px solid; padding: 5px 8px; color: red; border-radius: 5px;">
+                            Out of stock
+                        </span>
+                    </div>
                 }
 
-                <div class="product-card-body">
-                    <h5 class="product-title">@product.ProductName</h5>
-                    <p class="product-category">
-                        <i class="bi bi-tag-fill"></i> @product.CategoryName
-                    </p>
-
-                    <p class="product-price">
-                        <i class="bi bi-currency-pound"></i> @product.Price EGP
-                    </p>
-
-                    @if (product.Quantity > 0)
-                    {
-                        <button type="button" onclick="add(@product.Id)" class="add-to-cart-btn">
-                            <i class="bi bi-cart-plus"></i> Add To Cart
-                        </button>
-                    }
-                    else
-                    {
-                        <div class="out-of-stock">
-                            <i class="bi bi-exclamation-circle"></i> Out of stock
-                        </div>
-                    }
-                </div>
             </div>
-        }
-    </div>
+        </div>
+    }
 </div>
+
+
 
 @section Scripts {
     <script>
@@ -265,39 +99,22 @@
             var usernameEl = document.getElementById("username");
             if (usernameEl == null) {
                 window.location.href = "/Identity/Account/Login";
+                //var username=usernameEl.innerText;
+                //  if(username.length<1){
+                //      window.location.href="/Identity/Account/Login";
+                //  }
             }
-
             try {
                 var response = await fetch(`/Cart/AddItem?ProductId=${productId}`);
                 if (response.status == 200) {
                     var result = await response.json();
                     var cartCountEl = document.getElementById("cartCount");
-                    if (cartCountEl) {
-                        cartCountEl.innerHTML = result;
-                    }
-
-                    // Show success message
-                    Toastify({
-                        text: "Product added to cart successfully!",
-                        duration: 3000,
-                        gravity: "top",
-                        position: "right",
-                        backgroundColor: "linear-gradient(to right, #1a2a6c, #b21f1f)",
-                        className: "mt-5"
-                    }).showToast();
+                    cartCountEl.innerHTML = result;
+                    window.location.href = "#cartCount";
                 }
             }
             catch (err) {
                 console.log(err);
-
-                Toastify({
-                    text: "Error adding product to cart",
-                    duration: 3000,
-                    gravity: "top",
-                    position: "right",
-                    backgroundColor: "linear-gradient(to right, #ff6b6b, #dc3545)",
-                    className: "mt-5"
-                }).showToast();
             }
         }
     </script>
