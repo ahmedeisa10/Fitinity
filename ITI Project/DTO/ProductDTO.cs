@@ -12,7 +12,7 @@ namespace ITI_Project.DTO
         public string? ProductName { get; set; }
 
         [Required]
-        [MaxLength(100)]
+        [MaxLength(500)]
         public string? Description { get; set; }
         [Required]
         public double Price { get; set; }

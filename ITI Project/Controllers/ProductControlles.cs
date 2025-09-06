@@ -32,7 +32,20 @@ namespace Product_mvc.Controllers
             var product = await ProductRepository.GetProducts();
             return View(product);
         }
+        public async Task<IActionResult> ShowProductsCards(string sTerm = "", int CategoryId = 0)
+        {
+            var products = await ProductRepository.DisplayProducts(sTerm, CategoryId);
+            var categories = await ProductRepository.GetCategory();
+            var productModel = new ProductDisplayModel()
+            {
+                Products = products,
+                Categories = categories,
+                sTerm = sTerm,
+                CategoryId = CategoryId
+            };
 
+            return View(productModel);
+        }
         public async Task<IActionResult> AddProduct()
         {
             var CategorySelectedList = (await categoryRepository.GetCategory()).Select(category => new SelectListItem
@@ -192,7 +205,7 @@ namespace Product_mvc.Controllers
         }
 
 
-        public async Task<IActionResult> DeleteBook(int id)
+        public async Task<IActionResult> DeleteProduct(int id)
         {
             try
             {
