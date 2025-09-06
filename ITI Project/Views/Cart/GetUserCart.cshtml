@@ -49,7 +49,7 @@
                                 </div>
                             </td>
                             <td class="fw-bold text-success">
-                                @(item.Product.Price * item.Quantity) USD
+                                @(item.Product.Price * item.Quantity) EGP
                             </td>
                             <td>
                                 <a href="/Cart/RemoveItem?productId=@item.ProductId"
@@ -68,7 +68,7 @@
             <h4 class="fw-bold">
                 Total:
                 <span class="text-success">
-                    @(Model.CartDetails.Select(i => i.Product.Price * i.Quantity).Sum()) USD
+                    @(Model.CartDetails.Select(i => i.Product.Price * i.Quantity).Sum()) EGP
                 </span>
             </h4>
             <a class="btn btn-lg btn-success rounded-pill px-4" href="/Cart/DoCheckout">
