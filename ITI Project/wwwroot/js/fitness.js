@@ -100,3 +100,34 @@
                 }
             });
         });
+(function () {
+    const slides = document.querySelectorAll('.slide');
+    let current = 0;
+    let interval = setInterval(nextSlide, 5000);
+
+    function show(index) {
+        slides.forEach((s, i) => {
+            s.classList.remove('active');
+            if (i === index) s.classList.add('active');
+        });
+        current = index;
+    }
+
+    function nextSlide() {
+        let next = (current + 1) % slides.length;
+        show(next);
+    }
+
+    function prevSlide() {
+        let prev = (current - 1 + slides.length) % slides.length;
+        show(prev);
+    }
+
+    document.querySelector('.arrow-left').addEventListener('click', () => { prevSlide(); reset(); });
+    document.querySelector('.arrow-right').addEventListener('click', () => { nextSlide(); reset(); });
+
+    function reset() {
+        clearInterval(interval);
+        interval = setInterval(nextSlide, 5000);
+    }
+})();
