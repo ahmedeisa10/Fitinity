@@ -46,10 +46,7 @@ namespace ITI_Project.Controllers
         }
 
 
-        public IActionResult Index()
-        {
-            return View();
-        }
+       
 
         
         public IActionResult AboutUs()
