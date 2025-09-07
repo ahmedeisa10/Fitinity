@@ -55,9 +55,6 @@ namespace ITI_Project.Controllers
         }
 
 
-        public IActionResult PLAN()
-        {
-            return View();
-        }
+      
     }
 }
