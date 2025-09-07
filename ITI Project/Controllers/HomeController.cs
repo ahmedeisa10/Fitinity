@@ -49,7 +49,7 @@ namespace ITI_Project.Controllers
        
 
         
-        public IActionResult AboutUs()
+        public IActionResult BMIPlan()
         {
             return View();
         }
