@@ -133,6 +133,68 @@
         </div>
     </section>
 
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>About Fitinity</h3>
+                    <p>We help you achieve your health and fitness goals through customized training and nutrition programs with professional and experienced trainers.</p>
+                    <div class="footer-social">
+                        <a href="javascript:void(0)" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="javascript:void(0)" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="javascript:void(0)" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="javascript:void(0)" class="social-icon"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+
+               
+
+                <div class="footer-column">
+                    <h3>Our Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="javascript:void(0)"><i class="fas fa-angle-right"></i> Personal Training</a></li>
+                        <li><a href="/Home/BMIPlan"><i class="fas fa-angle-right"></i> Nutrition Programs</a></li>
+                        <li><a href="/Home/BMIPlan"><i class="fas fa-angle-right"></i> BMI Calculator</a></li>
+                        <li><a href="/Product/ShowProductsCards"><i class="fas fa-angle-right"></i> Fitness Products</a></li>
+                        <li><a href="javascript:void(0)"><i class="fas fa-angle-right"></i> Online Consultations</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-map-marker-alt contact-icon"></i>
+                        <div class="contact-info">Mansourah,Dakahlia,Egypt</div>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-phone contact-icon"></i>
+                        <div class="contact-info">+201026027887</div>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-envelope contact-icon"></i>
+                        <div class="contact-info">fitinity@gmail.com</div>
+                    </div>
+
+                    <h3 class="mt-4">Newsletter</h3>
+                    <p>Subscribe to our newsletter to receive the latest offers and health tips.</p>
+                    <form class="newsletter-form">
+                        <input type="email" class="newsletter-input" placeholder="Your Email" required>
+                        <button type="button" class="newsletter-btn">Subscribe Now</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="payment-methods">
+                    <div class="payment-icon">Visa</div>
+                    <div class="payment-icon">MC</div>
+                    <div class="payment-icon">Pay</div>
+                    <div class="payment-icon">Apple</div>
+                </div>
+            </div>
+        </div>
+    </footer>
 
 </div>
 
@@ -243,7 +305,7 @@
             }
 
         /* تأثيرات responsive */
-        media (max-width: 768px) {
+        @@media (max-width: 768px) {
             .btn-bmi
 
         {
@@ -272,6 +334,219 @@
         }
 
         }
+
+        /* Footer Styles */
+        .site-footer {
+            background: linear-gradient(135deg, #5a5a5a 0%, #3a3a3a 100%);
+            color: #f1f1f1;
+            padding: 3rem 0 1.5rem;
+            margin-top: 4rem;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+            box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            padding: 0 2rem;
+            max-width: 1200px;
+            margin: 0 auto 2rem;
+        }
+
+        .footer-column {
+            flex: 1;
+            min-width: 250px;
+        }
+
+            .footer-column h3 {
+                font-size: 1.3rem;
+                margin-bottom: 1.5rem;
+                position: relative;
+                padding-bottom: 0.5rem;
+                font-weight: 600;
+                color: #e0e0e0;
+            }
+
+                .footer-column h3::after {
+                    content: '';
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    width: 50px;
+                    height: 3px;
+                    background: linear-gradient(to right, #d4af37, #6a11cb);
+                    border-radius: 3px;
+                }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+            .footer-links li {
+                margin-bottom: 0.8rem;
+            }
+
+            .footer-links a {
+                color: #d1d1d1;
+                text-decoration: none;
+                transition: all 0.3s ease;
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+            }
+
+                .footer-links a:hover {
+                    color: #ffffff;
+                    transform: translateX(5px);
+                }
+
+                .footer-links a i {
+                    font-size: 0.9rem;
+                    color: #d4af37;
+                }
+
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            color: #d4af37;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+            .social-icon:hover {
+                background: linear-gradient(135deg, #d4af37 0%, #6a11cb 100%);
+                color: white;
+                transform: translateY(-3px);
+            }
+
+        .footer-newsletter p {
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+            color: #d1d1d1;
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            border: none;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+            .newsletter-input::placeholder {
+                color: #ccc;
+            }
+
+        .newsletter-btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            background: linear-gradient(135deg, #d4af37 0%, #6a11cb 100%);
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+            .newsletter-btn:hover {
+                opacity: 0.9;
+                transform: translateY(-2px);
+                box-shadow: 0 5px 15px rgba(106, 17, 203, 0.4);
+            }
+
+        .footer-contact-item {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            align-items: flex-start;
+        }
+
+        .contact-icon {
+            margin-top: 0.2rem;
+            color: #d4af37;
+            font-size: 1.2rem;
+            min-width: 20px;
+        }
+
+        .contact-info {
+            flex: 1;
+            color: #d1d1d1;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #aaa;
+            font-size: 0.9rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .payment-methods {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 1rem;
+        }
+
+        .payment-icon {
+            width: 40px;
+            height: 25px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #d4af37;
+            font-size: 12px;
+        }
+
+        /* Responsive styles for footer */
+        media (max-width: 768px) {
+            .footer-content
+
+        {
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .newsletter-form {
+            flex-direction: column;
+        }
+
+        .footer-column {
+            min-width: 100%;
+        }
+
+        }
+
+
+
     </style>
 }
 

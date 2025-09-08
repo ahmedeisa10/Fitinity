@@ -1,5 +1,8 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
+@{
+    ViewData["Title"] = "Plans";
+}
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -263,7 +266,7 @@
             gap: 20px;
             margin: 40px 0;
         }
-        
+
         .program-card {
             background: white;
             width: 300px;
@@ -272,6 +275,8 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s;
             border: 1px solid #eee;
+            display: flex;
+            flex-direction: column;
         }
         
         .program-card:hover {
@@ -283,35 +288,49 @@
             height: 200px;
             object-fit: cover;
         }
-        
+
         .program-content {
             padding: 20px;
+            flex-grow: 1; /* المحتوى يأخذ المساحة المتاحة */
         }
-        
-        .program-content h3 {
-            color: #2575fc;
-            margin-bottom: 10px;
+
+
+
+            .program-content h3 {
+                color: #2575fc;
+                margin-bottom: 10px;
+            }
+
+            .program-content p {
+                color: #666;
+                margin-bottom: 15px;
+            }
+
+        .program-button-container {
+            padding: 0 20px 20px; /* نفس padding الجانبي مع padding سفلي */
+            margin-top: auto; /* يدفع الزر إلى الأسفل */
         }
-        
-        .program-content p {
-            color: #666;
-            margin-bottom: 15px;
-        }
-        
+
         .program-btn {
-            display: inline-block;
-            padding: 8px 16px;
+            display: block;
+            width: 100%;
+            padding: 12px;
             background: #ff6b6b;
             color: white;
             text-decoration: none;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            transition: background 0.3s;
+            border-radius: 50px;
+            font-size: 1rem;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            text-align: center;
         }
-        
-        .program-btn:hover {
-            background: #ff8e8e;
-        }
+
+            .program-btn:hover {
+                background: #ff8e8e;
+                transform: translateY(-3px);
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            }
         
         /* Detailed Nutrition Plan */
         .nutrition-plan {
@@ -491,22 +510,7 @@
 </head>
 <body>
     <!-- Fixed Navbar -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="#" class="logo">
-                <i class="fas fa-dumbbell"></i>
-                Health & Fitness
-            </a>
-            <ul class="nav-links">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Workouts</a></li>
-                <li><a href="#">Nutrition</a></li>
-                <li><a href="#">Contact</a></li>
-            </ul>
-        </div>
-    </nav>
-
+    
     <div class="container">
         <header>
             <h1>Your Fitness Journey Starts Here</h1>
@@ -569,24 +573,30 @@
                     <div class="program-content">
                         <h3>Weight Gain Program</h3>
                         <p>Healthy diet system to gain weight and build muscles</p>
+                    </div>
+                    <div class="program-button-container">
                         <button class="program-btn view-plan" data-plan="underweight">View Program</button>
                     </div>
                 </div>
-                
+
                 <div class="program-card">
                     <img src="https://images.unsplash.com/photo-1494390248081-4e521a5940db?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80" alt="Weight Maintenance Program">
                     <div class="program-content">
                         <h3>Weight Maintenance Program</h3>
                         <p>Balanced system to maintain your current weight</p>
+                    </div>
+                    <div class="program-button-container">
                         <button class="program-btn view-plan" data-plan="normal">View Program</button>
                     </div>
                 </div>
-                
+
                 <div class="program-card">
                     <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80" alt="Weight Loss Program">
                     <div class="program-content">
                         <h3>Weight Loss Program</h3>
                         <p>Effective diet system to lose excess weight</p>
+                    </div>
+                    <div class="program-button-container">
                         <button class="program-btn view-plan" data-plan="overweight">View Program</button>
                     </div>
                 </div>
