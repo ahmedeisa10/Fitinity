@@ -15,12 +15,10 @@
 
     <style>
         :root {
-            --primary-color: #3a3a3a;
-            --secondary-color: #5a5a5a;
-            --accent-color: #d4af37;
-            --light-color: #6a11cb;
-            --text-light: #ffffff;
-            --text-dark: #333333;
+            --primary-color: #1a2a6c;
+            --secondary-color: #b21f1f;
+            --accent-color: #fdbb2d;
+            --light-color: #ff6b6b;
         }
 
         html, body {
@@ -31,109 +29,74 @@
 
         body {
             background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-            color: var(--text-dark);
+            color: #333;
             line-height: 1.6;
             display: flex;
             flex-direction: column;
             min-height: 100vh;
         }
 
-        /* شريط التنقل - تصميم جديد */
+        /* شريط التنقل */
         .navbar {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)) !important;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color), var(--accent-color)) !important;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-            padding: 10px 0;
-            transition: all 0.3s ease;
+            padding: 12px 0;
         }
 
         .navbar-brand {
-            font-weight: 700;
+            font-weight: bold;
             font-size: 1.8rem;
-            color: var(--text-light) !important;
+            color: white !important;
             display: flex;
             align-items: center;
-            transition: all 0.3s ease;
         }
 
             .navbar-brand i {
-                margin-right: 12px;
+                margin-right: 10px;
                 color: var(--accent-color);
-                background: linear-gradient(135deg, var(--accent-color), var(--light-color));
-                -webkit-background-clip: text;
-                -webkit-text-fill-color: transparent;
-                font-size: 1.9rem;
-                transition: all 0.3s ease;
             }
 
         .nav-link {
             color: rgba(255, 255, 255, 0.85) !important;
             font-weight: 500;
-            padding: 8px 16px !important;
+            padding: 8px 15px !important;
             border-radius: 20px;
             transition: all 0.3s ease;
-            margin: 0 4px;
-            position: relative;
+            margin: 0 5px;
         }
-
-            .nav-link::before {
-                content: '';
-                position: absolute;
-                bottom: 0;
-                left: 50%;
-                width: 0;
-                height: 2px;
-                background: linear-gradient(to right, var(--accent-color), var(--light-color));
-                transition: all 0.3s ease;
-                transform: translateX(-50%);
-            }
 
             .nav-link:hover,
             .nav-link.active {
-                color: var(--text-light) !important;
-                background: rgba(255, 255, 255, 0.1);
+                color: white !important;
+                background: rgba(255, 255, 255, 0.15);
                 transform: translateY(-2px);
             }
-
-                .nav-link:hover::before,
-                .nav-link.active::before {
-                    width: 70%;
-                }
 
         .navbar-toggler {
             border: none;
-            color: var(--text-light);
+            color: white;
             font-size: 1.5rem;
-            padding: 4px 8px;
         }
-
-            .navbar-toggler:focus {
-                box-shadow: 0 0 0 2px var(--accent-color);
-            }
 
         /* زر التسجيل والدخول */
         .btn-outline-light {
-            color: var(--text-light);
-            border-color: var(--text-light);
-            transition: all 0.3s ease;
+            color: white;
+            border-color: white;
         }
 
             .btn-outline-light:hover {
-                background-color: var(--text-light);
+                background-color: white;
                 color: var(--primary-color);
-                transform: translateY(-2px);
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             }
 
         .btn-primary {
-            background: linear-gradient(135deg, var(--accent-color), var(--light-color));
+            background: var(--light-color);
             border: none;
-            transition: all 0.3s ease;
         }
 
             .btn-primary:hover {
-                background: linear-gradient(135deg, #e6a825, #7a25cb);
+                background: #ff8e8e;
                 transform: translateY(-2px);
-                box-shadow: 0 4px 12px rgba(106, 17, 203, 0.3);
             }
 
         /* المحتوى الرئيسي */
@@ -148,17 +111,16 @@
             border: none;
             border-radius: 15px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: transform 0.3s;
         }
 
             .card:hover {
                 transform: translateY(-5px);
-                box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
             }
 
         .card-header {
             background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: var(--text-light);
+            color: white;
             border-radius: 15px 15px 0 0 !important;
             border: none;
         }
@@ -166,20 +128,18 @@
         /* الجداول */
         .table th {
             background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: var(--text-light);
+            color: white;
             border: none;
         }
 
         /* الأزرار */
         .btn-success {
-            background: linear-gradient(135deg, var(--accent-color), var(--light-color));
+            background: var(--accent-color);
             border: none;
-            transition: all 0.3s;
         }
 
             .btn-success:hover {
-                background: linear-gradient(135deg, #e6a825, #7a25cb);
-                transform: translateY(-2px);
+                background: #e6a825;
             }
 
         /* تصميم متجاوب */
@@ -200,7 +160,7 @@
 
         /* عدّاد السلة */
         .cart-count {
-            background: linear-gradient(135deg, var(--accent-color), var(--light-color));
+            background-color: var(--light-color);
             color: white;
             border-radius: 50%;
             width: 20px;
@@ -212,12 +172,11 @@
             position: relative;
             top: -10px;
             right: 7px;
-            font-weight: bold;
         }
 
         /* FOOTER STYLES - FULL WIDTH (SMALLER SIZE) */
         .site-footer {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            background: linear-gradient(135deg, #5a5a5a 0%, #3a3a3a 100%);
             color: #f1f1f1;
             padding: 1.5rem 0 0.8rem;
             width: 100%;
@@ -260,7 +219,7 @@
                     left: 0;
                     width: 40px;
                     height: 2px;
-                    background: linear-gradient(to right, var(--accent-color), var(--light-color));
+                    background: linear-gradient(to right, #d4af37, #6a11cb);
                     border-radius: 2px;
                 }
 
@@ -291,7 +250,7 @@
 
                 .footer-links a i {
                     font-size: 0.8rem;
-                    color: var(--accent-color);
+                    color: #d4af37;
                 }
 
         .footer-social {
@@ -308,14 +267,14 @@
             height: 32px;
             border-radius: 50%;
             background: rgba(255, 255, 255, 0.1);
-            color: var(--accent-color);
+            color: #d4af37;
             transition: all 0.3s ease;
             text-decoration: none;
             font-size: 0.9rem;
         }
 
             .social-icon:hover {
-                background: linear-gradient(135deg, var(--accent-color), var(--light-color));
+                background: linear-gradient(135deg, #d4af37 0%, #6a11cb 100%);
                 color: white;
                 transform: translateY(-2px);
             }
@@ -352,7 +311,7 @@
             padding: 0.6rem 1rem;
             border: none;
             border-radius: 4px;
-            background: linear-gradient(135deg, var(--accent-color), var(--light-color));
+            background: linear-gradient(135deg, #d4af37 0%, #6a11cb 100%);
             color: white;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -376,7 +335,7 @@
 
         .contact-icon {
             margin-top: 0.1rem;
-            color: var(--accent-color);
+            color: #d4af37;
             font-size: 1rem;
             min-width: 16px;
         }
@@ -410,7 +369,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--accent-color);
+            color: #d4af37;
             font-size: 10px;
         }
 
@@ -443,7 +402,7 @@
         <nav class="navbar navbar-expand-lg" data-bs-theme="dark">
             <div class="container-fluid">
                 <a class="navbar-brand" href="/Home/Index">
-                    <i class="fas fa-dumbbell"></i> Fitinity
+                    <i class="fas fa-heartbeat"></i> Fitinity
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -550,7 +509,7 @@
         loadCartCount();
         async function loadCartCount() {
             try {
-                var response = await fetch(/Cart/GetCartItemCount);
+                var response = await fetch(`/Cart/GetCartItemCount`);
                 console.log(response)
                 if (response.status == 200) {
                     var result = await response.json();
