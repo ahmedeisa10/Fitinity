@@ -48,25 +48,37 @@
 
 @section Scripts {
     <script>
-        // Add to Cart function
+              // Add to Cart function
         async function add(productId) {
             var usernameEl = document.getElementById("username");
             if (!usernameEl) {
                 window.location.href = "/Identity/Account/Login";
                 return;
             }
-            
+
             try {
-                var response = await fetch(`/Cart/AddItem?ProductId=${productId}`);
-                if (response.status === 200) {
+                var response = await fetch(`/Cart/IncreaseItem?ProductId=${productId}`, {
+                    method: "POST"
+                });
+
+                if (response.ok) {
                     var result = await response.json();
-                    document.getElementById("cartCount").innerHTML = result;
-                    window.location.href = "#cartCount";
+
+                    if (result.success) {
+                        document.getElementById("cartCount").innerHTML = result.count;
+                        // تحديث الإجمالي لو عايز
+                        if (document.getElementById("cartTotal")) {
+                            document.getElementById("cartTotal").innerText = result.total + " EGP";
+                        }
+                    } else {
+                        alert(result.message || "Something went wrong!");
+                    }
                 }
             } catch (err) {
                 console.log(err);
             }
         }
+
 
         // Live search & category filter
         async function filterProducts() {

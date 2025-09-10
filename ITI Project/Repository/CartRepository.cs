@@ -22,7 +22,7 @@ namespace ITI_Project.Repository
             this.httpContextAccessor = httpContextAccessor;
         }
 
-        public async Task<int> AddItem(int productId, int Qty)
+        public async Task<int> IncreaseItem(int productId, int Qty)
         {
             string userId = GetUserId();
             using var transaction = context.Database.BeginTransaction();
@@ -70,7 +70,7 @@ namespace ITI_Project.Repository
             return cartItemCount;
         }
 
-        public async Task<int> RemoveItem(int productId)
+        public async Task<int> DecreaseItem(int productId)
         {
             string userId = GetUserId();
             try
@@ -100,6 +100,38 @@ namespace ITI_Project.Repository
             var cartItemCount = await GetCartItemCount(userId);
             return cartItemCount;
         }
+
+        public async Task<int> DeleteItem(int productId)
+        {
+            string userId = GetUserId();
+            try
+            {
+                if (string.IsNullOrEmpty(userId))
+                    throw new UnauthorizedAccessException("user is not logged-in");
+
+                var cart = await GetCart(userId);
+                if (cart is null)
+                    throw new InvalidOperationException("Invalid Cart");
+
+                var CartDetail = context.CartDetails
+                    .FirstOrDefault(c => c.ShoppingCart_Id == cart.Id && c.ProductId == productId);
+
+                if (CartDetail is null)
+                    throw new InvalidOperationException("No Item In The Cart");
+
+                context.CartDetails.Remove(CartDetail);
+                context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+            }
+
+            var cartItemCount = await GetCartItemCount(userId);
+            return cartItemCount;
+        }
+
+
+
 
         public async Task<ShoppingCart> GetUserCart()
         {
@@ -213,7 +245,26 @@ namespace ITI_Project.Repository
             }
         }
 
-        private string GetUserId()
+
+        public async Task<double> GetCartTotal(string userId)
+        {
+            var cart = await GetCart(userId);
+
+            if (cart == null)
+                return 0;
+
+            var total = context.CartDetails
+                .Where(c => c.ShoppingCart_Id == cart.Id)
+                .Sum(c => c.Quantity * c.UnitPrice);
+
+            return total;
+        }
+
+
+
+
+
+        public string GetUserId()
         {
             var user = httpContextAccessor.HttpContext.User;
             var userId = userManager.GetUserId(user);

@@ -32,6 +32,7 @@ namespace Product_mvc.Controllers
             var product = await ProductRepository.GetProducts();
             return View(product);
         }
+        
         [AllowAnonymous]
         public async Task<IActionResult> ShowProductsCards(string sTerm = "", int CategoryId = 0)
         {

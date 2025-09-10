@@ -1,4 +1,5 @@
 ﻿@model ITI_Project.DTO.CheckoutModel
+@inject Microsoft.Extensions.Options.IOptions<ITI_Project.Constants.StripeData> StripeOptions
 @{
     ViewData["Title"] = "Checkout";
 }

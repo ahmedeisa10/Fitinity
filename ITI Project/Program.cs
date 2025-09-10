@@ -5,6 +5,8 @@ using ITI_Project.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore;
+using ITI_Project.Constants;
+using Stripe;
 
 
 namespace ITI_Project
@@ -21,6 +23,9 @@ namespace ITI_Project
                 options.UseSqlServer(connectionString));
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
+          
+
+
             builder.Services
                .AddIdentity<IdentityUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
                .AddEntityFrameworkStores<ApplicationDbContext>()
@@ -28,6 +33,7 @@ namespace ITI_Project
                .AddDefaultTokenProviders();
             builder.Services.AddControllersWithViews();
             builder.Services.AddHttpClient();
+
 
 
             //Services
@@ -66,6 +72,8 @@ namespace ITI_Project
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
+            StripeConfiguration.ApiKey = builder.Configuration.GetSection("Stripe:SecreteKey").Get<String>();
 
             app.UseRouting();
 

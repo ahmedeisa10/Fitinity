@@ -10,5 +10,8 @@ namespace ITI_Project.Repository
             Task TogglePaymentStatus(int orderId);
             Task<Order?> GetOrderById(int id);
             Task<IEnumerable<OrderStatus>> GetOrderStatuses();
+            //Task MarkOrderAsPaid(int orderId);
+            //Task ClearUserCart(string userId);
+            //Task UpdateStripePaymentId(int orderId, string sessionId, string paymentIntentId);
         }
 }

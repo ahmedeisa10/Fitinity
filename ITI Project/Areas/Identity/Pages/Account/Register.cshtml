@@ -1,6 +1,7 @@
 ﻿@page
 @model RegisterModel
 @{
+    ViewData["HideFooter"] = true;
     ViewData["Title"] = "Register";
 }
 
@@ -41,36 +42,31 @@
         <a asp-page="./Login" asp-route-returnUrl="@Model.ReturnUrl" class="w-100 btn btn-lg btn-outline-secondary mb-3">Log In</a>
 
 
-        <!-- Divider -->
-        <div class="d-flex align-items-center mb-3">
-            <hr class="flex-grow-1">
-            <span class="px-2 text-muted">OR</span>
-            <hr class="flex-grow-1">
-        </div>
+     
 
-        <!-- Google Login -->
-        @* <a asp-controller="Account" asp-action="GoogleLogin" *@
-        <button type="button"
-           class="w-100 btn btn-lg btn-light border d-flex align-items-center justify-content-center">
-            <img src="https://developers.google.com/identity/images/g-logo.png"
-                 alt="Google" width="20" height="20" class="me-2">
-            Register with Google
-        </button>
-
-        @* </a> *@
+       
 
         <hr />
-
+        @* Register With Google *@
         @if ((Model.ExternalLogins?.Count ?? 0) > 0)
         {
             <div class="text-center">
                 <p class="text-muted">Or sign up with</p>
                 @foreach (var provider in Model.ExternalLogins!)
                 {
-                    <button type="submit" class="btn btn-outline-dark w-100 mb-2" form="external-account"
-                            name="provider" value="@provider.Name">
-                        <i class="bi bi-google"></i> @provider.DisplayName
+                    <button type="submit"
+                            class="w-100 btn btn-lg btn-light border d-flex align-items-center justify-content-center gap-2"
+                            form="external-account"
+                            name="provider"
+                            value="@provider.Name">
+        <svg width="20" height="20" viewBox="0 0 533.5 544.3">
+                <path fill="#4285F4" d="M533.5 278.4c0-17.4-1.6-34.1-4.6-50.4H272v95.5h146.9c-6.3 34.1-25.3 63-54 82.4l87.2 68.1c50.9-46.9 80.4-115.8 80.4-195.6z"/>
+                <path fill="#34A853" d="M272 544.3c73.3 0 134.8-24.3 179.7-66l-87.2-68.1c-24.3 16.3-55.2 25.9-92.5 25.9-71 0-131.2-47.8-152.7-112.1l-90.5 69.9c43.8 86.5 133.5 151.4 243.2 151.4z"/>
+                <path fill="#FBBC05" d="M119.5 324.9c-10.3-30.8-10.3-64.3 0-95.1l-90.5-69.9c-39.7 78.9-39.7 173.4 0 252.3l90.5-69.9z"/>
+                <path fill="#EA4335" d="M272 107.7c38.8-0.6 75.9 14.4 104 40.7l78-78C406.8 24.5 345.3 0 272 0 162.3 0 72.6 64.9 28.8 151.4l90.5 69.9c21.5-64.3 81.7-112.1 152.7-112.1z"/>
+            </svg>                        <span>Google</span>
                     </button>
+
                 }
             </div>
             <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post"></form>

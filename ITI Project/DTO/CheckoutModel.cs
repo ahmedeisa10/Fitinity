@@ -5,12 +5,12 @@ namespace ITI_Project.DTO
     public class CheckoutModel
     {
         [Required]
-        [MaxLength(30)]
+        [MaxLength(50)]
         public string? Name { get; set; }
 
         [Required]
         [EmailAddress]
-        [MaxLength(30)]
+        [MaxLength(50)]
         public string? Email { get; set; }
         [Required]
         public string? MobileNumber { get; set; }
