@@ -23,7 +23,12 @@ namespace ITI_Project
                 options.UseSqlServer(connectionString));
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-          
+            builder.Services.AddAuthentication()
+                 .AddGoogle(options =>
+                 {
+                     options.ClientId = builder.Configuration["Authentication:Google:ClientId"];
+                     options.ClientSecret = builder.Configuration["Authentication:Google:ClientSecret"];
+                 });
 
 
             builder.Services
@@ -34,7 +39,7 @@ namespace ITI_Project
             builder.Services.AddControllersWithViews();
             builder.Services.AddHttpClient();
 
-           
+
 
             //Services
             builder.Services.AddScoped<IHomeRepository, HomeRepository>();
@@ -43,7 +48,7 @@ namespace ITI_Project
             builder.Services.AddScoped<IStockRepository, StockRepository>();
             builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
             builder.Services.AddScoped<IProductRepository, ProductRepository>();
-            
+
             builder.Services.AddScoped<IFileServices, FileServices>();
 
 
