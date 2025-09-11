@@ -34,7 +34,7 @@ namespace ITI_Project
             builder.Services.AddControllersWithViews();
             builder.Services.AddHttpClient();
 
-
+           
 
             //Services
             builder.Services.AddScoped<IHomeRepository, HomeRepository>();
