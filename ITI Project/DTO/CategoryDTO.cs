@@ -8,6 +8,6 @@ namespace ITI_Project.DTO
 
         [Required]
         [MaxLength(40)]
-        public string  { get; set; }
+        public string CategoryName { get; set; }
     }
 }
