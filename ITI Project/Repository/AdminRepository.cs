@@ -19,7 +19,8 @@ namespace ITI_Project.Repository
             var user = new IdentityUser
             {
                 UserName = email,
-                Email = email
+                Email = email,
+                EmailConfirmed=true
             };
 
             var result = await userManager.CreateAsync(user, password);
