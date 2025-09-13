@@ -16,10 +16,10 @@
 
     <style>
         :root {
-            --primary-color: #1a2a6c;
-            --secondary-color: #b21f1f;
-            --accent-color: #fdbb2d;
-            --light-color: #ff6b6b;
+            --primary-color: #5a5a5a;
+            --secondary-color: #3a3a3a;
+            --accent-color: #d4af37;
+            --light-color: #6a11cb;
         }
 
         html, body {
@@ -29,7 +29,7 @@
         }
 
         body {
-            background-color: #e9ecef; /* رمادي فاتح */
+            background-color: #e9ecef;
             color: #333;
             line-height: 1.6;
             display: flex;
@@ -37,9 +37,9 @@
             min-height: 100vh;
         }
 
-        /* شريط التنقل */
+        /* شريط التنقل - نفس لون الفوتر */
         .navbar {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color), var(--accent-color)) !important;
+            background: linear-gradient(135deg, #5a5a5a 0%, #3a3a3a 100%) !important;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
             padding: 12px 0;
         }
@@ -50,11 +50,41 @@
             color: white !important;
             display: flex;
             align-items: center;
+            position: relative;
+            overflow: hidden;
         }
 
             .navbar-brand i {
                 margin-right: 10px;
-                color: var(--accent-color);
+                color: var(--accent-color); /* لون ذهبي للدمبل */
+                transition: all 0.5s ease;
+                transform-origin: center;
+            }
+
+            /* أنيميشن للاسم والدمبل */
+            .navbar-brand:hover i {
+                transform: rotate(360deg) scale(1.2);
+                color: #ffd700; /* لون ذهبي أكثر إشراقًا عند التمرير */
+                text-shadow: 0 0 10px rgba(255, 215, 0, 0.7);
+            }
+
+            .navbar-brand:hover {
+                text-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+            }
+
+            .navbar-brand::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: -100%;
+                width: 100%;
+                height: 2px;
+                background: linear-gradient(90deg, transparent, #d4af37, transparent);
+                transition: all 0.5s ease;
+            }
+
+            .navbar-brand:hover::after {
+                left: 100%;
             }
 
         .nav-link {
@@ -96,7 +126,7 @@
         }
 
             .btn-primary:hover {
-                background: #ff8e8e;
+                background: #7d2ae0;
                 transform: translateY(-2px);
             }
 
@@ -140,7 +170,7 @@
         }
 
             .btn-success:hover {
-                background: #e6a825;
+                background: #c19b2e;
             }
 
         /* تصميم متجاوب */
@@ -161,7 +191,7 @@
 
         /* عدّاد السلة */
         .cart-count {
-            background-color: var(--light-color);
+            background-color: var(--accent-color);
             color: white;
             border-radius: 50%;
             width: 20px;
