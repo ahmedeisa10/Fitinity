@@ -4,6 +4,7 @@ using ITI_Project.Repository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Identity;
 
 namespace ITI_Project.Controllers
 {
@@ -11,10 +12,13 @@ namespace ITI_Project.Controllers
     public class AdminOperationsController : Controller
     {
         private readonly IUserOrderRepository userOrderRepository;
+        private readonly IAdminRepository adminRepository;
 
-        public AdminOperationsController(IUserOrderRepository userOrderRepository)
+        public AdminOperationsController(IUserOrderRepository userOrderRepository,
+            IAdminRepository adminRepository)
         {
             this.userOrderRepository = userOrderRepository;
+            this.adminRepository = adminRepository;
         }
         public async Task<IActionResult> AllOrders()
         {
@@ -95,5 +99,41 @@ namespace ITI_Project.Controllers
         {
             return View();
         }
+
+        [HttpGet]
+        public IActionResult CreateAdmin()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateAdmin(string email, string password)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await adminRepository.CreateAdmin(email, password);
+
+                if (result.Succeeded)
+                {
+                    TempData["Success"] = "Admin created successfully!";
+                    return RedirectToAction("CreateAdmin");
+                }
+
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
+            }
+
+            return View();
+        }
+
+
+        public async Task<IActionResult> AllUsers()
+        {
+            var users = await adminRepository.AllUsers();
+            return View(users);
+        }
+
     }
 }

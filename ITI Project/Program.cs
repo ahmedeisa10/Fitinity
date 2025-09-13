@@ -48,6 +48,7 @@ namespace ITI_Project
             builder.Services.AddScoped<IStockRepository, StockRepository>();
             builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
             builder.Services.AddScoped<IProductRepository, ProductRepository>();
+            builder.Services.AddScoped<IAdminRepository, AdminRepository>();
 
             builder.Services.AddScoped<IFileServices, FileServices>();
 

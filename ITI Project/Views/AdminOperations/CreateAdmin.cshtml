@@ -1,0 +1,23 @@
+﻿@{
+    ViewData["Title"] = "Add New Admin";
+}
+
+<div class="container mt-5">
+    <h2 class="text-center text-primary">Add New Admin</h2>
+    <form asp-action="CreateAdmin" method="post" class="shadow p-4 rounded bg-light col-md-6 offset-md-3">
+        <div class="mb-3">
+            <label class="form-label">Email</label>
+            <input name="email" type="email" class="form-control" required />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Password</label>
+            <input name="password" type="password" class="form-control" required />
+        </div>
+        <button type="submit" class="btn btn-success w-100">Create Admin</button>
+    </form>
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success mt-3">@TempData["Success"]</div>
+    }
+</div>

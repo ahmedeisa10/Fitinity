@@ -55,7 +55,11 @@
                     <li><a class="nav-link" asp-page="./PersonalData"><i class="bi bi-database"></i> Personal Data</a></li>
                     <li><a class="nav-link" asp-controller="Home" asp-action="Index"><i class="bi bi-house-door-fill"></i> Back to Home</a></li>
                     <li class="mt-3">
-                        <a class="btn btn-outline-light w-100" asp-page="/Account/Logout">Logout</a>
+                <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                            <button type="submit" class="btn btn-outline-light w-100">
+                                <span>Logout</span>
+                        </button>
+                   </form>
                     </li>
                 </ul>
             </div>
