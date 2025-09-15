@@ -125,7 +125,7 @@ The home page is a **centralized dashboard** with:
    cd fitinity
 2. Install dependencies:
             Install .NET SDK
-             Restore NuGet packages
+            Restore NuGet packages
 
 3.Configure the database:
   Update the connection string in appsettings.json
@@ -147,19 +147,23 @@ Contributing:
  4.Push to the branch (git push origin feature/YourFeature)
 
  5.Open a Pull Request
+
+
+ #Team Members
  Ahmed Eisa
 
-Mai El-Shazly
+ Mai El-Shazly
 
-Yaseen Hamouda
+ Yaseen Hamouda
 
-Ammar El-Sherbiny
+ Ammar El-Sherbiny
 
-Hagar Magdy
+ Hagar Magdy
 
-Gamal Saad
+ Gamal Saad
 
 Contact:
+
  Mansoura, Dakahlia, Egypt
  +20 102 602 7887
  fitinity@gmail.com
