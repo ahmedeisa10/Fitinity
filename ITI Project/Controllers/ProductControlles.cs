@@ -214,7 +214,7 @@ namespace Product_mvc.Controllers
                 var Product = await ProductRepository.GetProductById(id);
                 if (Product == null)
                 {
-                    TempData["errorMessage"] = $"Book with the id: {id} does not found";
+                    TempData["errorMessage"] = $"product with the id: {id} does not found";
                 }
                 else
                 {
