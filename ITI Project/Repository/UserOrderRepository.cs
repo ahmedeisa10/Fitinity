@@ -1,6 +1,7 @@
 ﻿using ITI_Project.Data;
 using ITI_Project.DTO;
 using ITI_Project.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,6 +19,15 @@ namespace ITI_Project.Repository
             this.context = context;
             this.httpContextAccessor = httpContextAccessor;
             this.userManager = userManager;
+        }
+        public IEnumerable<Order> GetOrdersByUserId(string userId)
+        {
+            return context.Orders
+                           .Include(o => o.OrderStatus)
+                           .Include(o => o.OrderDetails)
+                           .Where(o => o.UserId == userId)
+                           .OrderByDescending(o => o.CreateDate)
+                           .ToList();
         }
 
         public async Task ChangeOrderStatus(UpdateOrderStatusModel data)
@@ -74,35 +84,6 @@ namespace ITI_Project.Repository
         }
 
 
-        //public async Task MarkOrderAsPaid(int orderId)
-        //{
-        //    var order = await context.Orders.FindAsync(orderId);
-        //    if (order == null)
-        //        throw new InvalidOperationException($"Order with id:{orderId} not found");
-
-        //    order.IsPaid = true;
-        //    order.OrderStatusId = 2; // Approved (عدلها على حسب Id عندك)
-        //    await context.SaveChangesAsync();
-        //}
-
-        //public async Task ClearUserCart(string userId)
-        //{
-        //    var carts = context.ShoppingCarts.Where(c => c.UserId == userId);
-        //    context.ShoppingCarts.RemoveRange(carts);
-        //    await context.SaveChangesAsync();
-        //}
-
-        //public async Task UpdateStripePaymentId(int orderId, string sessionId, string paymentIntentId)
-        //{
-        //    var order = await context.Orders.FindAsync(orderId);
-        //    if (order == null)
-        //        throw new InvalidOperationException($"Order with id:{orderId} not found");
-
-        //    order.SessionId = sessionId;
-        //    order.PaymentIntentId = paymentIntentId;
-
-        //    await context.SaveChangesAsync();
-        //}
 
 
         private string GetUserId()
