@@ -18,7 +18,7 @@
                         <tr>
                             <th>📅 Date</th>
                             <th>👤 Name</th>
-                            <th>📧 Email</th>
+                            <th style="width: 200px;">📧 Email</th>
                             <th>📱 Mobile</th>
                             <th>🏠 Address</th>
                             <th>💳 Payment</th>
@@ -32,7 +32,7 @@
                             <tr>
                                 <td>@order.CreateDate.ToString("dd-MM-yyyy")</td>
                                 <td>@order.Name</td>
-                                <td>@order.Email</td>
+                                <td class="email-cell" title="@order.Email">@order.Email</td>
                                 <td>@order.MobileNumber</td>
                                 <td>@order.Address</td>
                                 <td>
@@ -87,3 +87,13 @@
         </div>
     </div>
 </div>
+
+<style>
+    /* بس للإيميل */
+    .email-cell {
+        max-width: 200px; /* نفس اللي في th */
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+</style>
